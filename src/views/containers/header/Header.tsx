@@ -9,6 +9,8 @@ const Header = (): ReactElement => {
       alignItems="center"
       justifyContent="space-between"
       px="2em"
+      minHeight="4em"
+      bgcolor="lightGray"
     >
       <Box>Logo</Box>
       <Box>Links</Box>

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import {
   Box,
   Accordion,
@@ -9,6 +9,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ProductCard from '../../../components/productCard/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +37,7 @@ const Listing = (): ReactElement => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
             >
-              <Typography className={classes.heading}>Accordion 1</Typography>
+              <Typography className={classes.heading}>Sizes</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Checkbox
@@ -47,19 +48,41 @@ const Listing = (): ReactElement => {
             </AccordionDetails>
           </Accordion>
         </Box>
-        <Box>s</Box>
+      </Box>
+    );
+  };
+
+  const renderCards = (): ReactElement => {
+    return (
+      <Box>
+        <Box>
+          <ProductCard
+            name={'Nike Blue Shoes'}
+            priceText={'34,99$'}
+            photoUrl={
+              'https://images.unsplash.com/photo-1578116922645-3976907a7671?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80'
+            }
+            color={'Blue'}
+            size={'L'}
+          />
+        </Box>
       </Box>
     );
   };
 
   return (
-    <Box>
-      <Box display="flex" flexDirection="row" alignItems="top" justifyContent="center">
-        <Box width={1 / 4}>
+    <Box py="3em" px="1em">
+      <Box
+        display="flex"
+        flexDirection={{ xs: 'column', md: 'row' }}
+        alignItems="top"
+        justifyContent="center"
+      >
+        <Box width={1 / 4} mr="3em" mb="2em">
           <Box>{renderFilters()}</Box>
         </Box>
         <Box width={3 / 4}>
-          <Box>products</Box>
+          <Box>{renderCards()}</Box>
         </Box>
       </Box>
     </Box>
