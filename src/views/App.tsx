@@ -24,7 +24,7 @@ const App = (): ReactElement => {
         <GlobalStyle />
         <Provider store={store}>
           <Box>
-            <Header cartProducts={cartProducts} />
+            <Header cartProducts={cartProducts} setCartProducts={setCartProducts} />
             <Listing cartProducts={cartProducts} setCartProducts={setCartProducts} />
           </Box>
         </Provider>

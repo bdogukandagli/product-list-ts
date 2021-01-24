@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
     avatar: {
       objectFit: 'cover',
     },
+    productItem: {
+      cursor: 'pointer',
+    },
   })
 );
 
@@ -33,6 +36,7 @@ interface IPropTypes {
   cartProducts: IProduct[];
   setActive: Dispatch<SetStateAction<any>>;
   isActive: boolean;
+  setCartProducts: Dispatch<SetStateAction<any>>;
 }
 
 const ShoppingCardModal = (props: IPropTypes) => {
@@ -96,17 +100,32 @@ const ShoppingCardModal = (props: IPropTypes) => {
                           <Typography>{product.name}</Typography>
                         </Box>
                       </Box>
-                      <Box ml="4em">
+                      <Box ml="4em" display="flex">
                         <Typography variant="h6" color="textSecondary">
                           {`${product.price}$`}
                         </Typography>
+                        <Box
+                          ml="1em"
+                          className={classes.productItem}
+                          onClick={() =>
+                            props.setCartProducts(
+                              props.cartProducts.filter((t) => t.id != product.id)
+                            )
+                          }
+                        >
+                          <Typography variant="h6" color="textSecondary">
+                            X
+                          </Typography>
+                        </Box>
                       </Box>
                     </Box>
                   );
                 })
               ) : (
                 <Box p="2em">
-                  <Typography>You can check our new products</Typography>
+                  <Typography>
+                    You can check our new products. Press ESC and check our products.
+                  </Typography>
                 </Box>
               )}
             </Box>

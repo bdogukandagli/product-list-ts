@@ -1,5 +1,9 @@
 {
   "name": "product-list-ts",
+  "author": {
+    "name": "bdogukandagli",
+    "email": "bdogukandagli@gmail.com"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {

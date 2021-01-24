@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, Dispatch, SetStateAction } from 'react';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { IProduct } from '../../../utils/interfaces';
@@ -6,6 +6,7 @@ import ShoppingCartModal from '../../../components/shoppingCartModal/index';
 
 interface IPropTypes {
   cartProducts: IProduct[];
+  setCartProducts: Dispatch<SetStateAction<any>>;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +50,7 @@ const Header = (props: IPropTypes): ReactElement => {
           isActive={isModalActive}
           setActive={setModalActive}
           cartProducts={props.cartProducts}
+          setCartProducts={props.setCartProducts}
         />
       </Box>
     </Box>
