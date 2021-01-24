@@ -1,15 +1,18 @@
-import React, { ReactElement } from 'react';
-import {
-  Box,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Checkbox,
-  makeStyles,
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React, { ReactElement, useEffect, useState } from 'react';
+import { Box, makeStyles } from '@material-ui/core';
 import ProductCard from '../../../components/productCard/index';
+import FilterCard from '../../../components/filterCard/index';
+import FilterSliderCard from '../../../components/filterSliderCard/index';
+
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import {
+  getAllProductsStart,
+  getProductFiltersStart,
+  getFilteredProductsStart,
+} from '../../../actions/productAction';
+import { IProduct, IFilter } from '../../../utils/interfaces';
+import { ProductState } from '../../../actions/types';
+import { RootState } from '../../../reducers/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +25,40 @@ const useStyles = makeStyles((theme) => ({
 
 const Listing = (): ReactElement => {
   const classes = useStyles();
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedPrice, setSelectedPrice] = useState([]);
+
+  const products: IProduct[] = useSelector(
+    (storage: RootState) => storage.products.products,
+    shallowEqual
+  );
+
+  const filters: IFilter = useSelector(
+    (storage: RootState) => storage.products.filters,
+    shallowEqual
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductsStart());
+    dispatch(getProductFiltersStart());
+  }, []);
+
+  useEffect(() => {
+    if (selectedPrice || selectedSizes || selectedCategories || selectedColors) {
+      dispatch(
+        getFilteredProductsStart(
+          selectedSizes,
+          selectedCategories,
+          selectedColors,
+          selectedPrice
+        )
+      );
+    }
+  }, [selectedPrice, selectedSizes, selectedColors, selectedCategories]);
 
   const renderFilters = (): ReactElement => {
     return (
@@ -32,21 +69,36 @@ const Listing = (): ReactElement => {
         className={classes.root}
       >
         <Box>
-          <Accordion color="gray">
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-            >
-              <Typography className={classes.heading}>Sizes</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'primary checkbox' }}
-              />
-            </AccordionDetails>
-          </Accordion>
+          <FilterCard
+            accordionTitle="Colors"
+            filterObject={filters.colors}
+            selectedFilters={selectedColors}
+            setSelectedFilters={setSelectedColors}
+          />
+        </Box>
+        <Box my="1em">
+          <FilterCard
+            accordionTitle="Sizes"
+            filterObject={filters.sizes}
+            selectedFilters={selectedSizes}
+            setSelectedFilters={setSelectedSizes}
+          />
+        </Box>
+        <Box>
+          <FilterCard
+            accordionTitle="Categories"
+            filterObject={filters.categories}
+            selectedFilters={selectedCategories}
+            setSelectedFilters={setSelectedCategories}
+          />
+        </Box>
+        <Box my="1em">
+          <FilterSliderCard
+            accordionTitle="Price"
+            filterObject={filters.priceInfo}
+            selectedFilters={selectedPrice}
+            setSelectedFilters={setSelectedPrice}
+          />
         </Box>
       </Box>
     );
@@ -54,18 +106,24 @@ const Listing = (): ReactElement => {
 
   const renderCards = (): ReactElement => {
     return (
-      <Box>
-        <Box>
-          <ProductCard
-            name={'Nike Blue Shoes'}
-            priceText={'34,99$'}
-            photoUrl={
-              'https://images.unsplash.com/photo-1578116922645-3976907a7671?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80'
-            }
-            color={'Blue'}
-            size={'L'}
-          />
-        </Box>
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="left"
+        alignItems="center"
+        flexWrap="wrap"
+      >
+        {products.map((product) => (
+          <Box key={product.id} mx="1em" mb="1em">
+            <ProductCard
+              name={product.name}
+              priceText={`${product.price}$`}
+              photoUrl={product.photoUrl}
+              color={product.color}
+              size={product.size}
+            />
+          </Box>
+        ))}
       </Box>
     );
   };
@@ -90,3 +148,16 @@ const Listing = (): ReactElement => {
 };
 
 export default Listing;
+
+/*
+
+for checkboxes;
+
+1- Name'e ihtiyaç var mı bundan emin ol?  -- Yok. Form kullanmana gerek yok çünkü.
+2- Yoksa direkt olarak bunu bir component yapısına getir. Burada iki tip mevzu olacak.
+    2.1-) filters içerisindeki array'leri mapleyerek checkboxları oluştur.
+    2.2-) Her accordion ve checkboxların birleşimi bir component olmalı. Yani maplediğin değerler Accordion 
+    içerisine Checkbox olarak düşmeli
+3- Accordion bilgilerini title vb. dışarıdan verebilirsin. Bunlarda da bir beis yok?
+
+*/
