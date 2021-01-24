@@ -35,6 +35,15 @@
       "size": "XL",
       "color": "Black",
       "category": "Male"
+    },
+    {
+      "id": 5,
+      "name": "Hat",
+      "price": 9.99,
+      "photoUrl": "https://images.unsplash.com/photo-1578116922645-3976907a7671?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "size": "S",
+      "color": "Green",
+      "category": "Female"
     }
   ]
 }

@@ -1,7 +1,27 @@
-import React, { ReactElement } from 'react';
-import { Box } from '@material-ui/core';
+import React, { ReactElement, useState } from 'react';
+import { Box, makeStyles, Typography } from '@material-ui/core';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { IProduct } from '../../../utils/interfaces';
+import ShoppingCartModal from '../../../components/shoppingCartModal/index';
 
-const Header = (): ReactElement => {
+interface IPropTypes {
+  cartProducts: IProduct[];
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    borderRadius: '7px',
+    boxShadow: '0 0 4px 0 rgba(0, 0, 0, 0.3)',
+  },
+  iconWrapper: {
+    cursor: 'pointer',
+  },
+}));
+
+const Header = (props: IPropTypes): ReactElement => {
+  const classes = useStyles();
+  const [isModalActive, setModalActive] = useState(false);
+
   return (
     <Box
       display="flex"
@@ -11,9 +31,26 @@ const Header = (): ReactElement => {
       px="2em"
       minHeight="4em"
       bgcolor="lightGray"
+      className={classes.root}
     >
       <Box>Logo</Box>
-      <Box>Links</Box>
+      <Box
+        className={classes.iconWrapper}
+        display="flex"
+        onClick={() => setModalActive(true)}
+      >
+        <ShoppingCartIcon />
+        <Box>
+          <Typography variant="h6" color="textSecondary">
+            {props.cartProducts.length}
+          </Typography>
+        </Box>
+        <ShoppingCartModal
+          isActive={isModalActive}
+          setActive={setModalActive}
+          cartProducts={props.cartProducts}
+        />
+      </Box>
     </Box>
   );
 };

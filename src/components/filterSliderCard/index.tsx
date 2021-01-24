@@ -40,7 +40,7 @@ const FilterSliderCard = (props: IPropTypes): ReactElement => {
           <Typography className={classes.heading}>{props.accordionTitle}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <div className={classes.root}>
+          <Box minWidth={{ xs: '230px', md: '300px' }}>
             <Slider
               value={value}
               onChange={(event, newValue) => {
@@ -60,7 +60,7 @@ const FilterSliderCard = (props: IPropTypes): ReactElement => {
                 gutterBottom
               >{`${value[0]}$ - ${value[1]}$`}</Typography>
             </Box>
-          </div>
+          </Box>
         </AccordionDetails>
       </Accordion>
     </Box>

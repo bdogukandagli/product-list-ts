@@ -1,18 +1,29 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, {
+  ReactElement,
+  useEffect,
+  useState,
+  SetStateAction,
+  Dispatch,
+} from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import ProductCard from '../../../components/productCard/index';
 import FilterCard from '../../../components/filterCard/index';
 import FilterSliderCard from '../../../components/filterSliderCard/index';
-
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   getAllProductsStart,
   getProductFiltersStart,
   getFilteredProductsStart,
+  addToCartStart,
 } from '../../../actions/productAction';
 import { IProduct, IFilter } from '../../../utils/interfaces';
 import { ProductState } from '../../../actions/types';
 import { RootState } from '../../../reducers/index';
+
+interface IPropTypes {
+  cartProducts: IProduct[];
+  setCartProducts: Dispatch<SetStateAction<any>>;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Listing = (): ReactElement => {
+const Listing = (props: IPropTypes): ReactElement => {
   const classes = useStyles();
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
@@ -59,6 +70,12 @@ const Listing = (): ReactElement => {
       );
     }
   }, [selectedPrice, selectedSizes, selectedColors, selectedCategories]);
+
+  useEffect(() => {
+    if (props.cartProducts.length > 0) {
+      dispatch(addToCartStart(props.cartProducts));
+    }
+  }, [props.cartProducts]);
 
   const renderFilters = (): ReactElement => {
     return (
@@ -121,6 +138,10 @@ const Listing = (): ReactElement => {
               photoUrl={product.photoUrl}
               color={product.color}
               size={product.size}
+              category={product.category}
+              product={product}
+              setCartProducts={props.setCartProducts}
+              cartProducts={props.cartProducts}
             />
           </Box>
         ))}
@@ -136,10 +157,10 @@ const Listing = (): ReactElement => {
         alignItems="top"
         justifyContent="center"
       >
-        <Box width={1 / 4} mr="3em" mb="2em">
+        <Box width={{ xs: '100%', md: '25%' }} mr="3em" mb="2em">
           <Box>{renderFilters()}</Box>
         </Box>
-        <Box width={3 / 4}>
+        <Box width={{ xs: '100%', md: '75%' }}>
           <Box>{renderCards()}</Box>
         </Box>
       </Box>

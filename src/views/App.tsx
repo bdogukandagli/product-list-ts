@@ -1,8 +1,9 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Box } from '@material-ui/core';
 import { createGlobalStyle } from 'styled-components';
+import { Provider } from 'react-redux';
+import store from '../store';
 import Header from './containers/header/Header';
-import Footer from './containers/footer/Footer';
 import Listing from './containers/listing/Listing';
 
 const GlobalStyle = createGlobalStyle`
@@ -15,14 +16,19 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = (): ReactElement => {
+  const [cartProducts, setCartProducts] = useState([]);
+
   return (
     <React.Fragment>
-      <GlobalStyle />
-      <Box>
-        <Header />
-        <Listing />
-        {/*<Footer />*/}
-      </Box>
+      <React.StrictMode>
+        <GlobalStyle />
+        <Provider store={store}>
+          <Box>
+            <Header cartProducts={cartProducts} />
+            <Listing cartProducts={cartProducts} setCartProducts={setCartProducts} />
+          </Box>
+        </Provider>
+      </React.StrictMode>
     </React.Fragment>
   );
 };

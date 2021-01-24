@@ -1,5 +1,6 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, Dispatch, SetStateAction } from 'react';
 import { Box, Avatar, Typography, Button, makeStyles } from '@material-ui/core';
+import { IProduct } from '../../utils/interfaces';
 
 interface IPropTypes {
   name: string;
@@ -7,6 +8,10 @@ interface IPropTypes {
   priceText: string;
   size: string;
   color: string;
+  category: string;
+  product: IProduct;
+  setCartProducts: Dispatch<SetStateAction<any>>;
+  cartProducts: IProduct[];
 }
 
 const useStyles = makeStyles(() => ({
@@ -42,13 +47,22 @@ const ProductCard = (props: IPropTypes): ReactElement => {
         <Typography>{props.name}</Typography>
       </Box>
       <Box mt="0.2em">
-        <Typography color="textSecondary">{`${props.color} / ${props.size}`}</Typography>
+        <Typography color="textSecondary">{`${props.color} / ${props.size} / ${props.category} `}</Typography>
       </Box>
       <Box mt="1em">
         <Typography variant="h6">{props.priceText}</Typography>
       </Box>
       <Box mt="1em">
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() =>
+            props.setCartProducts((currentProducts: any) => [
+              ...currentProducts,
+              props.product,
+            ])
+          }
+        >
           Add to Cart
         </Button>
       </Box>
