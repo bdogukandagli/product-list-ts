@@ -2,66 +2,62 @@
   "filters": {
     "colors": [
       {
-        "colorId": 1,
-        "colorText": "Blue"
+        "id": 1,
+        "text": "Blue"
       },
       {
-        "colorId": 2,
-        "colorText": "Red"
+        "id": 2,
+        "text": "Red"
       },
       {
-        "colorId": 3,
-        "colorText": "Yellow"
+        "id": 3,
+        "text": "Yellow"
       },
       {
-        "colorId": 4,
-        "colorText": "Black"
+        "id": 4,
+        "text": "Black"
       },
       {
-        "colorId": 5,
-        "colorText": "Green"
+        "id": 5,
+        "text": "Green"
       }
     ],
     "sizes": [
       {
-        "sizeId": 1,
-        "sizeText": "XS"
+        "id": 1,
+        "text": "XS"
       },
       {
-        "sizeId": 2,
-        "sizeText": "S"
+        "id": 2,
+        "text": "S"
       },
       {
-        "sizeId": 3,
-        "sizeText": "M"
+        "id": 3,
+        "text": "M"
       },
       {
-        "sizeId": 4,
-        "sizeText": "L"
+        "id": 4,
+        "text": "L"
       },
       {
-        "sizeId": 5,
-        "sizeText": "XL"
+        "id": 5,
+        "text": "XL"
       }
     ],
     "priceInfo": {
-      "minPrice": {
-        "price": 0,
-        "priceText": "0"
-      },
-      "maxPrice": {
-        "price": 1000,
-        "priceText": "1000"
-      }
+      "minPrice": 0,
+      "minPriceText": "0",
+      "maxPrice": 1000,
+      "maxPriceText": "1000"
     },
     "categories": [
       {
-        "categoryId": 1,
-        "categoryText": "Male"
+        "id": 1,
+        "text": "Male"
       },
       {
-        "categoryId": 2,
-        "categoryText": "Female"
+        "id": 2,
+        "text": "Female"
       }
     ]
   }

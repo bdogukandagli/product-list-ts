@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Blue First Quality Tshirt",
+      "price": 34.99,
+      "photoUrl": "https://images.unsplash.com/photo-1578116922645-3976907a7671?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "size": "S",
+      "color": "Blue",
+      "category": "Female"
+    },
+    {
+      "id": 2,
+      "name": "Trousers",
+      "price": 44.99,
+      "photoUrl": "https://images.unsplash.com/photo-1578116922645-3976907a7671?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "size": "M",
+      "color": "Black",
+      "category": "Male"
+    },
+    {
+      "id": 3,
+      "name": "Trousers",
+      "price": 21.99,
+      "photoUrl": "https://images.unsplash.com/photo-1578116922645-3976907a7671?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "size": "L",
+      "color": "Black",
+      "category": "Female"
+    },
+    {
+      "id": 4,
+      "name": "Shirt",
+      "price": 19.99,
+      "photoUrl": "https://images.unsplash.com/photo-1578116922645-3976907a7671?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "size": "XL",
+      "color": "Black",
+      "category": "Male"
+    }
+  ]
+}
