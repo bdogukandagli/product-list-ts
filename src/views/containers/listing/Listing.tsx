@@ -169,16 +169,3 @@ const Listing = (props: IPropTypes): ReactElement => {
 };
 
 export default Listing;
-
-/*
-
-for checkboxes;
-
-1- Name'e ihtiyaç var mı bundan emin ol?  -- Yok. Form kullanmana gerek yok çünkü.
-2- Yoksa direkt olarak bunu bir component yapısına getir. Burada iki tip mevzu olacak.
-    2.1-) filters içerisindeki array'leri mapleyerek checkboxları oluştur.
-    2.2-) Her accordion ve checkboxların birleşimi bir component olmalı. Yani maplediğin değerler Accordion 
-    içerisine Checkbox olarak düşmeli
-3- Accordion bilgilerini title vb. dışarıdan verebilirsin. Bunlarda da bir beis yok?
-
-*/
