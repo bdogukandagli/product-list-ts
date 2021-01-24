@@ -17,7 +17,6 @@ import {
   addToCartStart,
 } from '../../../actions/productAction';
 import { IProduct, IFilter } from '../../../utils/interfaces';
-import { ProductState } from '../../../actions/types';
 import { RootState } from '../../../reducers/index';
 
 interface IPropTypes {
