@@ -8,6 +8,9 @@ import {
   GET_PRODUCT_FILTERS_ERROR,
   GET_PRODUCT_FILTERS_START,
   GET_PRODUCT_FILTERS_SUCCESS,
+  ADD_TO_CART_ERROR,
+  ADD_TO_CART_SUCCESS,
+  ADD_TO_CART_START,
   ProductActionTypes,
 } from './types';
 import { IProduct, IFilter } from '../utils/interfaces';
@@ -79,6 +82,29 @@ export function getProductFiltersSuccess(filters: IFilter): ProductActionTypes {
 export function getProductFiltersError(error: string): ProductActionTypes {
   return {
     type: GET_PRODUCT_FILTERS_ERROR,
+    payload: error,
+  };
+}
+
+export function addToCartStart(cartProducts: IProduct[]): ProductActionTypes {
+  return {
+    type: ADD_TO_CART_START,
+    payload: {
+      cartProducts,
+    },
+  };
+}
+
+export function addToCartSuccess(cartProducts: IProduct[]): ProductActionTypes {
+  return {
+    type: ADD_TO_CART_SUCCESS,
+    payload: cartProducts,
+  };
+}
+
+export function addToCartError(error: string): ProductActionTypes {
+  return {
+    type: ADD_TO_CART_ERROR,
     payload: error,
   };
 }

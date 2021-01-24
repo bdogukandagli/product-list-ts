@@ -8,6 +8,9 @@ import {
   GET_PRODUCT_FILTERS_ERROR,
   GET_PRODUCT_FILTERS_START,
   GET_PRODUCT_FILTERS_SUCCESS,
+  ADD_TO_CART_ERROR,
+  ADD_TO_CART_SUCCESS,
+  ADD_TO_CART_START,
   ProductActionTypes,
   ProductState,
 } from '../actions/types';
@@ -21,6 +24,7 @@ const initialState: ProductState = {
     sizes: [],
     priceInfo: { minPrice: 0, minPriceText: '', maxPrice: 0, maxPriceText: '' },
   },
+  cartProducts: [],
   isLoading: false,
   error: '',
 };
@@ -76,6 +80,23 @@ export function productReducer(
         isLoading: false,
       };
     case GET_PRODUCT_FILTERS_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    case ADD_TO_CART_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case ADD_TO_CART_SUCCESS:
+      return {
+        ...state,
+        cartProducts: [...state.cartProducts, ...action.payload],
+        isLoading: false,
+      };
+    case ADD_TO_CART_ERROR:
       return {
         ...state,
         isLoading: false,

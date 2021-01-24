@@ -9,6 +9,9 @@ export const GET_FILTERED_PRODUCTS_ERROR = 'GET_FILTERED_PRODUCTS_ERROR';
 export const GET_PRODUCT_FILTERS_START = 'GET_PRODUCT_FILTERS_START';
 export const GET_PRODUCT_FILTERS_SUCCESS = 'GET_PRODUCT_FILTERS_SUCCESS';
 export const GET_PRODUCT_FILTERS_ERROR = 'GET_PRODUCT_FILTERS_ERROR';
+export const ADD_TO_CART_START = 'ADD_TO_CART_START';
+export const ADD_TO_CART_SUCCESS = 'ADD_TO_CART_SUCCESS';
+export const ADD_TO_CART_ERROR = 'ADD_TO_CART_ERROR';
 
 export interface GetAllProductsStart {
   type: typeof GET_ALL_PRODUCTS_START;
@@ -47,6 +50,7 @@ export interface GetFilteredProductsError {
 export interface ProductState {
   products: IProduct[];
   filters: IFilter;
+  cartProducts: IProduct[];
   isLoading: boolean;
   error: string;
 }
@@ -65,6 +69,23 @@ export interface GetProductFiltersError {
   payload: string;
 }
 
+export interface AddToCartStart {
+  type: typeof ADD_TO_CART_START;
+  payload: {
+    cartProducts: IProduct[];
+  };
+}
+
+export interface AddToCartSuccess {
+  type: typeof ADD_TO_CART_SUCCESS;
+  payload: IProduct[];
+}
+
+export interface AddToCartError {
+  type: typeof ADD_TO_CART_ERROR;
+  payload: string;
+}
+
 export type ProductActionTypes =
   | GetAllProductsError
   | GetAllProductsStart
@@ -74,4 +95,7 @@ export type ProductActionTypes =
   | GetFilteredProductsSuccess
   | GetProductFiltersStart
   | GetProductFiltersSuccess
-  | GetProductFiltersError;
+  | GetProductFiltersError
+  | AddToCartError
+  | AddToCartStart
+  | AddToCartSuccess;
